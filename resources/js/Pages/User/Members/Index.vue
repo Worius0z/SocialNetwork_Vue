@@ -15,7 +15,11 @@
                 </span>
             </div>
         </template>
-            <user-block :items="members"></user-block>
+        <!-------Phan trang members---->
+            <infinite-scroll @loadMore="loadMoreMembers">
+                <user-block :items="allMembers.data"></user-block>
+            </infinite-scroll>
+
     </pages-layout>
 </template>
 
@@ -23,15 +27,38 @@
     import { defineComponent } from 'vue'
     import PagesLayout from '@/Layouts/PagesLayout.vue'
     import UserBlock from '@/Components/UserBlock.vue'
-    import { Head, Link } from '@inertiajs/inertia-vue3';
+    import { Link } from '@inertiajs/inertia-vue3';
+    import InfiniteScroll from '@/Components/InfiniteScroll.vue';
     export default defineComponent({
         components: {
             PagesLayout,
             Link,
             UserBlock,
+            InfiniteScroll,
         },
         props: [
             'members',
         ],
+        data() {
+            return {
+                allMembers: this.members
+            }
+        },
+        methods: {
+            loadMoreMembers() {
+                if (!this.allMembers.next_page_url) {
+                    return
+                }
+                return axios.get(this.allMembers.next_page_url)
+                    .then(resp => {
+                        this.allMembers = {
+                            ...resp.data,
+                            data: [
+                                ...this.allMembers.data, ...resp.data.data
+                            ]
+                        }
+                    })
+            }
+        },
     })
 </script>

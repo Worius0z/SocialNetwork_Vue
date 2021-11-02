@@ -2,27 +2,20 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Models\User;
-use Inertia\Inertia;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class MemberController extends Controller
+class CommentLikeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, User $user) {
-        $members = User::notAuth($user)->paginate(15);
-        if($request->wantsJson()) {
-            return $members;
-        }
-        return Inertia::render('User/Members/Index',[
-            'members' => $members,
-        ]);
+    public function index()
+    {
+        //
     }
 
     /**
@@ -30,8 +23,7 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -39,11 +31,11 @@ class MemberController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request, Comment $comment) {
+        return auth()->user()->like($comment);
     }
 
     /**
@@ -83,11 +75,10 @@ class MemberController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Comment $comment) {
+        return auth()->user()->dislike($comment);
     }
 }

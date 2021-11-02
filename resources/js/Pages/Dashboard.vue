@@ -13,7 +13,11 @@
 
         <suggestion-block :suggestions="suggestions"></suggestion-block>
 
-        <combined-posts :posts="combinedPosts.data"></combined-posts>
+        <!-- <combined-posts :posts="combinedPosts.data"></combined-posts> -->
+
+        <infinite-scroll @loadMore="loadMorePosts">
+                <combined-posts :posts="allPosts.data"></combined-posts>
+        </infinite-scroll>
 
     </pages-layout>
 </template>
@@ -24,6 +28,7 @@
     import CombinedPosts from '@/Components/PostComment/CombinedPosts.vue'
     import PostForm from '@/Components/PostComment/PostForm.vue'
     import SuggestionBlock from '@/Components/SuggestionBlock.vue'
+    import InfiniteScroll from '@/Components/InfiniteScroll.vue'
 
     import BlueButton from '@/Components/Buttons/BlueButton'
     import { TrinityRingsSpinner } from 'epic-spinners'
@@ -38,6 +43,7 @@
             TrinityRingsSpinner,
             PostForm,
             SuggestionBlock,
+            InfiniteScroll,
 
             BlueButton,
             TrinityRingsSpinner,
@@ -51,15 +57,32 @@
                 form: this.$inertia.form({
                     user_id: this.$page.props.user.id,
                     body: this.body,
-                })
+                }),
+                allPosts: this.combinedPosts,
             }
         },
         methods: {
             submit(){
                 this.form.post(this.route('posts.store'), {
                     preserveScroll: true,
-                    onSuccess: () => {}
+                    onSuccess: () => {
+                        this.form.body = null
+                    }
                 })
+            },
+            loadMorePosts() {
+                if (!this.allPosts.next_page_url) {
+                    return
+                }
+                return axios.get(this.allPosts.next_page_url)
+                    .then(resp => {
+                        this.allPosts = {
+                            ...resp.data,
+                            data: [
+                                ...this.allPosts.data, ...resp.data.data
+                            ]
+                        }
+                    })
             }
         },
     })
