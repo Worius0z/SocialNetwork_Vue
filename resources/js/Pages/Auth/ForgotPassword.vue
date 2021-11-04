@@ -3,7 +3,9 @@
 
     <jet-authentication-card>
         <template #logo>
-            <jet-authentication-card-logo />
+           <Link :href=" route('Welcome') ">
+                <img :src="'storage/images/logo.png'" alt="Logo" class="w-40">
+            </Link>
         </template>
 
         <div class="mb-4 text-sm text-gray-600">
@@ -33,7 +35,7 @@
 
 <script>
     import { defineComponent } from 'vue'
-    import { Head } from '@inertiajs/inertia-vue3';
+    import { Head, Link } from '@inertiajs/inertia-vue3';
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
     import JetButton from '@/Jetstream/Button.vue'
@@ -44,6 +46,7 @@
     export default defineComponent({
         components: {
             Head,
+            Link,
             JetAuthenticationCard,
             JetAuthenticationCardLogo,
             JetButton,

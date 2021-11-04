@@ -16,7 +16,7 @@
         <!-- <combined-posts :posts="combinedPosts.data"></combined-posts> -->
 
         <infinite-scroll @loadMore="loadMorePosts">
-                <combined-posts :posts="allPosts.data"></combined-posts>
+                <combined-posts :posts="allPosts.data" :paginations="pagination"></combined-posts>
         </infinite-scroll>
 
     </pages-layout>
@@ -59,6 +59,11 @@
                     body: this.body,
                 }),
                 allPosts: this.combinedPosts,
+            }
+        },
+        computed: {
+            pagination() {
+                return this.allPosts = this.combinedPosts
             }
         },
         methods: {

@@ -1,34 +1,35 @@
 <template>
     <!-- <Head title="Welcome" /> -->
-
-    <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
+    <div >
+        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">     
         <div class="flex justify-around items-center dark:bg-gray-900 min-h-screen">
-            <img :src="'/storage/images/koi.png'" alt="Koi Social Network">
+            <img :src="'/storage/images/logo.png'" alt="Logo" class="w-60 ">
             <div class="text-center">
                 <h1 class="text-4x1 font-semibold text-blue-400"><strong>Koi Social Network</strong></h1>
                 <p class="mt-10 text-white">Hiện có hơn {{ users }} thành viên</p>
             </div>
 
             <div v-if="canLogin" class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-            <Link v-if="$page.props.user" :href="route('dashboard')" class="text-sm text-gray-700 underline">
-                Dashboard
-            </Link>
-            <template v-else>
-                <Link :href="route('login')" class="text-sm text-white bg-gray-400
-                rounded px-3 py-1 ml-2 hover:bg-gray-400 underline">
-                    Log in
+                <Link v-if="$page.props.user" :href="route('dashboard')" class="text-sm text-gray-700 underline">
+                    Dashboard
                 </Link>
+                <template v-else>
+                    <Link :href="route('login')" class="text-sm text-white bg-gray-400
+                    rounded px-3 py-1 ml-2 hover:bg-gray-400 underline">
+                        Log in
+                    </Link>
 
-                <Link v-if="canRegister" :href="route('register')" class="text-sm text-white bg-gray-400
-                rounded px-3 py-1 ml-2 hover:bg-gray-400 underline">
-                    Register
-                </Link>
-                
-            </template>
+                    <Link v-if="canRegister" :href="route('register')" class="text-sm text-white bg-gray-400
+                    rounded px-3 py-1 ml-2 hover:bg-gray-400 underline">
+                        Register
+                    </Link>
+                    
+                </template>
             
             </div>
         </div>
-        
+    </div>
+    <img :src="'/storage/images/bg.png'" alt="Background-image" class="w-full h-86 ">
     </div>
     
 </template>
@@ -113,6 +114,7 @@
             canRegister: Boolean,
             laravelVersion: String,
             phpVersion: String,
-        }
+        },
+        
     })
 </script>

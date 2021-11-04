@@ -1,7 +1,7 @@
 <template>
     
     <div class="flex flex-col min-h-screen ">
-        <nav class="bg-white border-b border-gray-100 w-full fixed z-20">
+        <nav class="bg-gray-400 border-b border-blue-100 w-full fixed z-20">
             <!-- Primary Navigation Menu -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16">
@@ -9,7 +9,7 @@
                         <!-- Logo -->
                         <div class="flex-shrink-0 flex items-center">
                             <Link :href="route('dashboard.index')" class="h-3/4 w-16">
-                               <img :src=" '/storage/images/koi.png' " alt="Logo"> 
+                               <img :src=" '/storage/images/logo.png' " alt="Logo"> 
                             </Link>
                         </div>
 

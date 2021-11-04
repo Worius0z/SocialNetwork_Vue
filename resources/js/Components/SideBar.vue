@@ -25,7 +25,9 @@
                     route: route('profiles.show',`${this.$page.props.user.username}`)
                     },
 
-                    {name: 'Members', route: route('members.index'), icon: `user`},
+                    {name: 'Members', route: route('members.index'), icon: `users`},
+
+                    {name: 'Friends', route: route('friends.index'), icon: `user-friends`},
 
                     {name:'edit profile', route: route('profile.show'), icon: `user-edit`},
 

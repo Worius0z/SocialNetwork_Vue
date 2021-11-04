@@ -9,7 +9,7 @@
                 </h2>
                 <span class="text-gray-800 leading-tight text-lg capitalize mt-5 sm:mt-0">
                     Visit your 
-                    <Link href="#" class="underline hover:text-green-500">
+                    <Link :href="route('friends.index')" class="underline hover:text-green-500">
                         <b>friends</b> 
                     </Link>
                 </span>

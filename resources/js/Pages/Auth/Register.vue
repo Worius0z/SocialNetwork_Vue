@@ -4,7 +4,7 @@
     <jet-authentication-card>
         <template #logo>
             <Link :href=" route('Welcome') ">
-                <img :src="'storage/images/koi.png'" alt="Logo" class="w-40">
+                <img :src="'storage/images/logo.png'" alt="Logo" class="w-40">
             </Link>
             <!-- <jet-authentication-card-logo /> -->
         </template>
